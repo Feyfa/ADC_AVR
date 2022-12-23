@@ -1,0 +1,2 @@
+# ADC_LCD16X2_ATMEGA8A
+ADC(8BIT) LCD16X2(4BIT) using ATMEGA8A with language (c++)
