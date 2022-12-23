@@ -1,5 +1,5 @@
 # EXPLANATION
-This project contains libraries for programming ATMEGA8A and LCD16x2 4-bit mode ADCs with (c++) language.
+This project contains libraries for programming ADC ATMEGA8A and LCD16x2 4-bit with language (C++). 
 # SOFTWARE USED
 - Atmel Studio 7 = Code Editor
 - Proteus = Circuit Simulation
