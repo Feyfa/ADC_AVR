@@ -4,7 +4,7 @@ This project contains libraries for programming ADC ATMEGA8A and LCD16x2 4-bit w
 - Atmel Studio 7 = Code Editor
 - Proteus = Circuit Simulation
 # HOW TO CREATE AN ATMEL STUDIO PROJECT AND PROTEUS SIMULATION
-You can see here https://github.com/Feyfa/LCD16X2_AVR
+You can see my readme here https://github.com/Feyfa/LCD16X2_AVR
 # THINGS THAT MUST BE CONSIDERED
 ### IF THESE TWO ARE NOT DONE THEN THE CIRCUIT WILL NOT WORK
 - AVCC pin on ATMEGA8A must be connected with VCC
