@@ -12,7 +12,7 @@
 
 int main(void)
 {
-	lm016l lcd = lm016l(usingPB);//lcd using in PB
+	lm016l lcd = lm016l(lcdUsingPB);//lcd using in PB
 	adc adc0 = adc(P0);//object adc0 uses on pin PC0
 	adc adc1 = adc(P1);//object adc1 uses on pin PC1
     while (1) 

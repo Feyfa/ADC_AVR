@@ -17,7 +17,7 @@
 #define LCD_EN 6 //PD6,PB6,P6
 #define SCL_CLOCK  100000
 
-typedef enum{usingPB,usingPD,usingI2C}UsingPort;
+typedef enum{lcdUsingPB,lcdUsingPD,lcdUsingI2C}LcdPort;
 typedef enum{RANGE0,RANGE1,RANGE2,RANGE3,RANGE4,RANGE5,RANGE6,RANGE7,RANGE8,RANGE9}Range;
 
 char* IntegerToString(int Value);
@@ -28,7 +28,7 @@ char* CharToString(char c);
 
 class lm016l{
 	private:
-		UsingPort port;
+		LcdPort port;
 		unsigned char address;
 		
 		void i2cwaitTWDRComplete();
@@ -40,12 +40,12 @@ class lm016l{
 		void Delay();
 		void command(unsigned char cmnd);
 		void data(unsigned char dataInput);
-		void init(UsingPort usingPort);
-		void init(UsingPort usingPort,uint8_t Address);
+		void init(LcdPort usingPort);
+		void init(LcdPort usingPort,uint8_t Address);
 		
 	public:
-		lm016l(UsingPort usingPort);
-		lm016l(UsingPort usingPort,uint8_t Address);
+		lm016l(LcdPort usingPort);
+		lm016l(LcdPort usingPort,uint8_t Address);
 		
 		void clear();
 		void location(uint8_t x,uint8_t y);

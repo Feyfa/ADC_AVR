@@ -92,7 +92,7 @@ void lm016l::Delay()
 }
 void lm016l::command(unsigned char cmnd)
 {
-	if(lm016l::port == usingPD){
+	if(lm016l::port == lcdUsingPD){
 		PORTD = (PORTD & 0xF0) | (cmnd >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : cmnd=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -112,7 +112,7 @@ void lm016l::command(unsigned char cmnd)
 		PORTD &= ~(1<<LCD_EN);  //HANYA EN=0
 		lm016l::Delay();
 	}
-	if(lm016l::port == usingPB){
+	if(lm016l::port == lcdUsingPB){
 		PORTB = (PORTB & 0xF0) | (cmnd >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : cmnd=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -132,7 +132,7 @@ void lm016l::command(unsigned char cmnd)
 		PORTB &= ~(1<<LCD_EN);  //HANYA EN=0
 		lm016l::Delay();
 	}
-	if(lm016l::port == usingI2C){
+	if(lm016l::port == lcdUsingI2C){
 		TWDR = (TWDR & 0xF0) | (cmnd >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : cmnd=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -160,7 +160,7 @@ void lm016l::command(unsigned char cmnd)
 }
 void lm016l::data(unsigned char dataInput)
 {
-	if(lm016l::port == usingPD){
+	if(lm016l::port == lcdUsingPD){
 		PORTD = (PORTD & 0xF0) | (dataInput >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : data=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -180,7 +180,7 @@ void lm016l::data(unsigned char dataInput)
 		PORTD &= ~(1<<LCD_EN);  //HANYA EN=0
 		lm016l::Delay();
 	}
-	if(lm016l::port == usingPB){
+	if(lm016l::port == lcdUsingPB){
 		PORTB = (PORTB & 0xF0) | (dataInput >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : data=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -200,7 +200,7 @@ void lm016l::data(unsigned char dataInput)
 		PORTB &= ~(1<<LCD_EN);  //HANYA EN=0
 		lm016l::Delay();
 	}
-	if(lm016l::port == usingI2C){
+	if(lm016l::port == lcdUsingI2C){
 		TWDR = (TWDR & 0xF0) | (dataInput >> 4); 
 		//MENGGESER NILAI DI BIT (7-4) MENJADI DI BIT (3-0) DAN BIT (7-4) NILAINYA (0 0 0 0)
 		//CONTOH : data=(0 0 1 0 1 0 0 0) BERUBAH MENJADI PORTA=(0 0 0 0 0 0 1 0)
@@ -226,8 +226,8 @@ void lm016l::data(unsigned char dataInput)
 		lm016l::Delay();
 	}
 }
-void lm016l::init(UsingPort usingPort){
-	if(usingPort == usingPB){
+void lm016l::init(LcdPort usingPort){
+	if(usingPort == lcdUsingPB){
 		DDRB = 0X7F;
 		PORTB &= ~(1<<LCD_EN);  //HANYA EN=0
 
@@ -238,7 +238,7 @@ void lm016l::init(UsingPort usingPort){
 		lm016l::command(0x01);  //clear screen lcd
 		lm016l::command(0x06);  //cursor geser ke kanan
 	}
-	if(usingPort == usingPD){
+	if(usingPort == lcdUsingPD){
 		DDRD = 0X7F;
 		PORTD &= ~(1<<LCD_EN);  //HANYA EN=0
 
@@ -250,8 +250,8 @@ void lm016l::init(UsingPort usingPort){
 		lm016l::command(0x06);  //cursor geser ke kanan
 	 }
 }
-void lm016l::init(UsingPort usingPort,uint8_t Address){
-	if(usingPort == usingI2C){
+void lm016l::init(LcdPort usingPort,uint8_t Address){
+	if(usingPort == lcdUsingI2C){
 		lm016l::i2cInit();
 		lm016l::i2cWrite(0X00,Address);
 		TWDR &= ~(1<<LCD_EN);  //HANYA EN=0
@@ -267,11 +267,11 @@ void lm016l::init(UsingPort usingPort,uint8_t Address){
 }
 
 //public method
-lm016l::lm016l(UsingPort usingSystem){
+lm016l::lm016l(LcdPort usingSystem){
 	lm016l::port = usingSystem;
 	lm016l::init(lm016l::port);	
 }
-lm016l::lm016l(UsingPort usingSystem,uint8_t Address){
+lm016l::lm016l(LcdPort usingSystem,uint8_t Address){
 	lm016l::port = usingSystem;
 	lm016l::address = Address;
 	lm016l::init(lm016l::port,lm016l::address);	
